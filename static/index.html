@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NoteVault — A beautiful personal notes app built with FastAPI" />
+    <title>NoteVault — Personal Notes</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <!-- ──── Floating Background Orbs ──── -->
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+    <div class="bg-orb bg-orb--3"></div>
+
+    <!-- ──── Header ──── -->
+    <header class="header">
+        <div class="header__brand">
+            <span class="header__icon">📝</span>
+            <h1 class="header__title">NoteVault</h1>
+        </div>
+        <p class="header__subtitle">Your personal notes, beautifully organized</p>
+    </header>
+
+    <!-- ──── Main Container ──── -->
+    <main class="main">
+
+        <!-- ──── Toolbar: Search + New Note Button ──── -->
+        <section class="toolbar" id="toolbar">
+            <div class="search-box">
+                <svg class="search-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-box__input"
+                    placeholder="Search notes…"
+                    autocomplete="off"
+                />
+            </div>
+            <button class="btn btn--primary" id="newNoteBtn">
+                <span class="btn__plus">+</span> New Note
+            </button>
+        </section>
+
+        <!-- ──── Category Filter Chips ──── -->
+        <section class="filter-chips" id="filterChips">
+            <button class="chip chip--active" data-category="All">All</button>
+            <button class="chip" data-category="General">General</button>
+            <button class="chip" data-category="Work">Work</button>
+            <button class="chip" data-category="Personal">Personal</button>
+            <button class="chip" data-category="Ideas">Ideas</button>
+        </section>
+
+        <!-- ──── Notes Grid ──── -->
+        <section class="notes-grid" id="notesGrid">
+            <!-- Notes are injected here by JavaScript -->
+        </section>
+
+        <!-- ──── Empty State ──── -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <span class="empty-state__emoji">🗒️</span>
+            <p class="empty-state__text">No notes yet. Click <strong>+ New Note</strong> to get started!</p>
+        </div>
+    </main>
+
+    <!-- ──── Modal: Create / Edit Note ──── -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="noteModal">
+            <div class="modal__header">
+                <h2 class="modal__title" id="modalTitle">New Note</h2>
+                <button class="modal__close" id="modalCloseBtn">&times;</button>
+            </div>
+            <form class="modal__form" id="noteForm">
+                <input type="hidden" id="noteIdField" value="" />
+
+                <label class="form-label" for="titleField">Title</label>
+                <input
+                    type="text"
+                    id="titleField"
+                    class="form-input"
+                    placeholder="Give your note a title…"
+                    required
+                    maxlength="100"
+                />
+
+                <label class="form-label" for="categoryField">Category</label>
+                <select id="categoryField" class="form-input">
+                    <option value="General">General</option>
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Ideas">Ideas</option>
+                </select>
+
+                <label class="form-label" for="contentField">Content</label>
+                <textarea
+                    id="contentField"
+                    class="form-input form-textarea"
+                    placeholder="Write something amazing…"
+                    required
+                    rows="6"
+                ></textarea>
+
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--ghost" id="modalCancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn--primary" id="saveBtn">Save Note</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ──── Toast Notification ──── -->
+    <div class="toast" id="toast"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
